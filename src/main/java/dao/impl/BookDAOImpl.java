@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.BookshelfDAO;
 import entity.BookEntity;
 import dao.BookDAO;
 import entity.BookshelfEntity;
@@ -37,14 +38,24 @@ public class BookDAOImpl implements BookDAO {
         transaction.commit();
     }
 
-    public void deleteBook(int idB){
+    public void deleteBook(Integer id){
         Session session = createHibernateSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("delete BookEntity where idB=:param");
-        query.setParameter("param",idB);
-        if (query.executeUpdate() > 0){
-            transaction.commit();
-        }
+        BookEntity book = session.load(BookEntity.class,id);
+        session.delete(book);
+        transaction.commit();
+    }
+    public void updateBook(int idB,String name,String bookshelfEntity){
+        Session session = createHibernateSession();
+        Transaction transaction = session.beginTransaction();
+        BookEntity book = session.load(BookEntity.class,idB);
+        BookshelfDAO bsd = new BookshelfDAOImpl();
+        BookshelfEntity bs = bsd.getBookshelfs().get(0);
+        book.setNameB(name);
+        book.setBookshelfByIdBs(bs);
+
+        session.update(book);
+        transaction.commit();
     }
 
     public List<BookEntity> getBooks(int idB) {
@@ -66,11 +77,20 @@ public class BookDAOImpl implements BookDAO {
         session.close();
         return books;
     }
-
+    public List<BookEntity> getBook(int idB) {
+        Session session = createHibernateSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("from BookEntity where idB=:param");
+        query.setParameter("param",idB);
+        List<BookEntity> bookEntities = query.list();
+        session.close();
+        return bookEntities;
+    }
     public List<BookEntity> getAllBooks(){
         Session session = createHibernateSession();
         Transaction transaction = session.beginTransaction();
         List<BookEntity> bookEntities= session.createQuery("from BookEntity ").list();
+        transaction.commit();
         return bookEntities;
     }
 }

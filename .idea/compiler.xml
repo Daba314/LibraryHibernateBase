@@ -10,8 +10,5 @@
         <module name="Task" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="LibraryHibernate" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>

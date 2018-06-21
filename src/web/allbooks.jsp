@@ -8,17 +8,17 @@
 <body>
 <header class="header">
     <h1 class="header_logo">
-        <a href="#" class="header_logo_link">Library</a></h1>
+        <a href="#" class="header_logo_link">Библиотека</a></h1>
     <nav class="nav_item">
         <ul class="nav_ul">
             <li class="nav_li">
                 <a href="/allbooks" class="nav_link nav_link1"> Книги </a>
             </li>
             <li class="nav_li">
-                <a href="/bookshelf" class="nav_link nav_link2"> Жанры </a>
+                <a href="/bookshelf" class="nav_link nav_link2"> Полки </a>
             </li>
             <li class="nav_li">
-                <a href="/cyclists" class="nav_link nav_link3"> Поиск </a>
+                <a href="/findbook.jsp" class="nav_link nav_link3"> Поиск </a>
             </li>
         </ul>
     </nav>
@@ -35,7 +35,7 @@
     <tr>
         <td>${book.nameB}
         </td>
-        <td><a href="/editTeam?teamId=${book.idB}">Изменить</a></td>
+        <td><a href="/editBook?idB=${book.idB}">Изменить</a></td>
         <td><a href="/deleteBook?idB=${book.idB}">Удалить</a></td>
     </tr>
     </tbody>
